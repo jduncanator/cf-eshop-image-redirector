@@ -1,0 +1,7 @@
+name = "cf-eshop-image-redirector"
+main = "src/index.ts"
+compatibility_date = "2023-01-16"
+
+kv_namespaces = [
+    { binding = "KV_ESHOP_ICON_MAPPING", id = "<PRODUCTION_BINDING_ID>", preview_id = "<DEV_BINDING_ID>" }
+]

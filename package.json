@@ -1,0 +1,20 @@
+{
+  "name": "cf-eshop-image-redirector",
+  "version": "1.0.1",
+  "description": "A Cloudflare Workers application to redirect to Nintendo Switch game icons served by the Nintendo eShop using the Title ID as a lookup.",
+  "main": "src/index.ts",
+  "repository": "https://github.com/jduncanator/cf-eshop-image-redirector",
+  "author": "jduncanator",
+  "license": "None",
+  "private": true,
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20221111.1",
+    "dotenv": "^16.0.3",
+    "lodash-es": "^4.17.21",
+    "typescript": "^4.9.4",
+    "wrangler": "^2.7.1"
+  },
+  "dependencies": {
+    "hono": "^2.7.2"
+  }
+}
