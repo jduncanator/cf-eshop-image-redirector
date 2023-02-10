@@ -8,10 +8,10 @@ const router = new Hono<{ Bindings: Bindings }>();
 
 router.get('/titleid/:id', async c => {
     const { id } = c.req.param();
-    const { placeholder } = c.req.query();
+    const { placeholder, w, h } = c.req.query();
 
     const id_upper = id.toUpperCase();
-    const kv_result = await c.env.KV_ESHOP_ICON_MAPPING.get(id_upper, {
+    let kv_result = await c.env.KV_ESHOP_ICON_MAPPING.get(id_upper, {
         type: 'text',
         cacheTtl: 3600 // 1 hour
     });
@@ -26,6 +26,22 @@ router.get('/titleid/:id', async c => {
 
         // Otherwise we return a 404 error
         return c.notFound();
+    }
+
+    // If we have width or height parameters,
+    // we pass them through on the redirect URI
+    if(w !== undefined || h !== undefined) {
+        try {
+            const url = new URL(kv_result);
+
+            w && url.searchParams.set('w', w);
+            h && url.searchParams.set('h', h);
+
+            kv_result = url.toString();
+        }
+        catch {
+            // Unable to parse the URL, do nothing.
+        }
     }
 
     // If we found an entry, we redirect the user to that URL.
